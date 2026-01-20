@@ -45,6 +45,7 @@ const Dashboard = {
         this.BMI.init();
         this.Currency.init();
         this.Timer.init();
+        this.CatFacts.init();
         console.log("Dashboard initialized successfully.");
     },
 
@@ -879,6 +880,42 @@ const Dashboard = {
             });
         }
     },
+
+    // 20. Cat Fact Generator Module
+    CatFacts: {
+        // New Reliable URL
+        URL: "https://catfact.ninja/fact",
+        
+        init: function() {
+            const btn = Dashboard.Utils.$('cat-fact-btn');
+            const refreshBtn = Dashboard.Utils.$('cat-fact-refresh');
+            const display = Dashboard.Utils.$('fact-display');
+
+            if (!btn || !display) return;
+
+            const fetchFact = async () => {
+                display.innerText = "Meow... (Fetching data)";
+                try {
+                    const response = await fetch(this.URL);
+                    if (!response.ok) throw new Error("Network issue");
+                    
+                    const data = await response.json();
+                    
+                    // The new API returns { "fact": "...", "length": 0 }
+                    display.innerText = data.fact;
+                    
+                    Dashboard.Utils.toast("New Cat Fact!", "success");
+                } catch (error) {
+                    console.error("Cat Fact Error:", error);
+                    display.innerText = "Failed to fetch fact. Try again!";
+                    Dashboard.Utils.toast("API Error", "error");
+                }
+            };
+
+            btn.addEventListener("click", fetchFact);
+            if (refreshBtn) refreshBtn.addEventListener("click", fetchFact);
+        }
+    }
 
 };
 
