@@ -1,0 +1,138 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #212121;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Centers the card vertically */
+}
+
+/* The Main Game Card */
+#wrapper {
+    background-color: #333;
+    width: 100%;
+    max-width: 450px; /* Prevents it from getting too wide */
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Nice drop shadow */
+    text-align: center;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.desc {
+    color: #bbb;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Form Elements */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* The Input Field */
+#guessField {
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid #555;
+    border-radius: 8px;
+    background-color: #444;
+    color: white;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#guessField:focus {
+    border-color: #007bff; /* Blue highlight on focus */
+}
+
+/* The Submit Button */
+#subt {
+    background-color: #007bff;
+    color: white;
+    width: 200px;
+    height: 45px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+}
+
+#subt:hover {
+    background-color: #0056b3;
+}
+
+/* Result Section */
+.resultParas {
+    margin-top: 30px;
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.resultParas p {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.guesses {
+    color: #00bcd4; /* Cyan for numbers */
+    font-weight: bold;
+}
+
+.lastResult {
+    color: #ff5722; /* Orange for count */
+    font-weight: bold;
+}
+
+.lowOrHi {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Styles for the "Start New Game" button created by JS */
+#newGame {
+    background-color: #fff;
+    color: #212121;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+#newGame:hover {
+    background-color: #e0e0e0;
+}

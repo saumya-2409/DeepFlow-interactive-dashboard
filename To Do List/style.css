@@ -1,0 +1,140 @@
+/* RESET & BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #eef2f3; /* Light Grey-Blue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* CONTROLS SECTION */
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+#input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#input:focus {
+    border-color: #01a3a4;
+}
+
+#add {
+    background-color: #01a3a4;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#add:hover {
+    background-color: #017c7c;
+}
+
+/* LIST STYLING */
+#list {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto; /* Scroll if too many items */
+    padding-right: 5px;
+}
+
+/* Custom Scrollbar */
+#list::-webkit-scrollbar { width: 5px; }
+#list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+
+.task-item {
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item:hover {
+    background-color: #fafafa;
+}
+
+/* CHECKBOX & LABEL */
+.task-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #01a3a4; /* Modern browser color support */
+}
+
+.task-item span {
+    font-size: 1rem;
+    color: #333;
+    flex: 1;
+    word-break: break-all;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+/* Checked State */
+.task-item.completed span {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+/* REMOVE BUTTON */
+#remove {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.2s;
+}
+
+#remove:hover {
+    opacity: 0.9;
+}

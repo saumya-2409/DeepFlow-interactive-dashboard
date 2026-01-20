@@ -1,0 +1,589 @@
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent-cyan: #38bdf8;
+    --accent-green: #22c55e;
+    --accent-red: #ef4444;
+    --accent-yellow: #f59e0b;
+    --border: #334155;
+}
+
+/* LIGHT MODE OVERRIDES */
+body.light-mode {
+    --bg-dark: #f0f2f5;       /* Light Grey Background */
+    --card-bg: #ffffff;       /* White Cards */
+    --text-main: #1e293b;     /* Dark Blue-Grey Text */
+    --text-muted: #64748b;    /* Muted Grey */
+    --border: #e2e8f0;        /* Light Borders */
+    /* Accents stay the same or can be tweaked */
+}
+
+/* RESET & BODY */
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Fallback color while video loads */
+    background: #0f172a; 
+}
+
+/* VIDEO BACKGROUND */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover; /* Covers screen without stretching */
+
+    /* LAYER FIX: Move to 0 so it sits ON TOP of the body color */
+    z-index: 0;
+}
+
+/* ================= HEADER ================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+    background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%,0.0);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-left h1 {
+    font-size: 2rem;
+    margin: 0;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-left p { margin: 5px 0 0 0; color: var(--text-muted); }
+
+.live-clock {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--accent-cyan);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    min-width: 160px;
+    text-align: center;
+}
+
+/* ================= GRID LAYOUT ================= */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 20px;
+    grid-auto-flow: dense; /* Fills empty gaps */
+}
+
+/* ================= SHARED CARD STYLES ================= */
+/* GLASSMORPHISM CARDS */
+/* --- GLASSMORPHISM CARDS --- */
+/* This replaces the old solid color style */
+.app-card, .widget-card {
+    /* 1. Semi-transparent background (Critical for glass effect) */
+    background: rgba(15, 23, 42, 0) !important; /* !important forces transparency */
+
+    /* 3. Borders and Shadows */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    color: #fff;
+    
+    /* Ensure text is readable on video */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Hover Effect */
+.app-card:hover, .widget-card:hover {
+    background: rgba(15, 23, 42, 0.8) !important; /* Slightly darker on hover */
+    border-color: var(--accent-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+}
+
+/* Fix for Video Positioning */
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -99; /* Forced behind everything */
+    object-fit: cover;
+    filter: brightness(0.6) contrast(1.2); /* Cinematic look */
+}
+/* Hover Effect: Lighter glass */
+.app-card:hover, .widget-card:hover {
+    background: rgba(15, 23, 42, 0.75);
+    border-color: var(--accent-cyan);
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+/* Link Cards (Static) */
+.app-card {
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 160px;
+}
+.app-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5);
+}
+.icon { font-size: 2rem; margin-bottom: 15px; }
+.title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+.desc { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Widget Cards (Interactive) */
+.widget-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Common Widget Headers */
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+.widget-card h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Common Buttons */
+button {
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: transform 0.1s;
+}
+button:active { transform: scale(0.95); }
+.action-btn {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    color: #fff;
+    background: var(--accent-cyan);
+}
+.action-btn.warn { background: var(--accent-yellow); color: black; }
+.icon-btn {
+    background: transparent;
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+.icon-btn:hover { background: var(--accent-red); color: white; }
+
+/* ================= LARGE WIDGETS ================= */
+.large-widget {
+    grid-column: span 2;
+    grid-row: span 2;
+    min-height: 350px;
+    padding: 25px;
+    justify-content: center;
+}
+@media (max-width: 768px) { .large-widget { grid-column: span 1; } }
+
+/* 1. Tic Tac Toe */
+.ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+.ttt-cell {
+    width: 80px; height: 80px; background: var(--bg-dark); border: 2px solid var(--border);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; font-weight: bold; cursor: pointer; color: white;
+}
+.ttt-cell:hover { background: #1e293b; border-color: var(--accent-cyan); }
+.ttt-cell.x { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
+.ttt-cell.o { color: #f472b6; text-shadow: 0 0 10px #f472b6; }
+#ttt-status { font-size: 1.2rem; font-weight: bold; color: white; }
+
+/* 2. BMI Calculator */
+.bmi-content-row { display: flex; gap: 20px; width: 100%; align-items: center; }
+.bmi-inputs { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.bmi-inputs input { background: var(--bg-dark); border: 1px solid var(--border); color: #fff; padding: 12px; border-radius: 6px; }
+.bmi-display { flex: 1; background: var(--bg-dark); padding: 20px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; }
+#bmi-result { font-size: 3.5rem; font-weight: 900; line-height: 1; }
+#bmi-category { font-size: 1.2rem; text-transform: uppercase; margin-top: 10px; color: var(--text-muted); }
+.bmi-normal { color: var(--accent-green); }
+.bmi-bad { color: var(--accent-red); }
+
+/* 3. Currency */
+.curr-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; width: 100%; }
+.curr-box { display: flex; gap: 10px; background: var(--bg-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border); }
+.large-widget select { background: var(--card-bg); color: var(--accent-cyan); border: 1px solid var(--border); padding: 5px; border-radius: 4px; }
+#curr-amount { background: transparent; border: none; color: #fff; font-size: 1.5rem; font-weight: bold; width: 100%; outline: none; }
+.curr-arrow { font-size: 1.5rem; cursor: pointer; color: var(--text-muted); text-align: center; }
+.curr-placeholder { flex: 1; color: var(--text-muted); font-style: italic; display: flex; align-items: center; }
+#curr-result { margin-top: 15px; font-size: 1.2rem; font-family: monospace; }
+
+/* 4. Guess Number */
+.guess-display-area { text-align: center; margin-bottom: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+#guess-msg { font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; }
+.guess-stats { font-family: monospace; color: var(--text-muted); }
+#guess-prev { color: var(--accent-cyan); word-break: break-all; }
+.guess-input-group { display: flex; gap: 10px; height: 60px; width: 100%; }
+#guess-input { width: 120px; background: var(--bg-dark); border: 2px solid var(--border); color: #fff; border-radius: 8px; font-size: 2rem; text-align: center; }
+#guess-btn { flex: 1; background: var(--accent-cyan); border: none; border-radius: 8px; font-weight: 800; font-size: 1.2rem; }
+
+/* ================= TALL WIDGETS ================= */
+.simon-widget, .rps-widget, .todo-widget {
+    grid-row: span 2;
+}
+
+/* 5. Simon Says */
+.simon-widget { background: #111; justify-content: center; }
+.simon-board { position: relative; width: 220px; height: 220px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px; background: #000; border-radius: 50%; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
+.simon-btn { border-radius: 10px; cursor: pointer; opacity: 0.5; border: 2px solid rgba(255,255,255,0.1); }
+.simon-btn.green { background: #0f0; border-radius: 100% 10px 10px 10px; }
+.simon-btn.red { background: #f00; border-radius: 10px 100% 10px 10px; }
+.simon-btn.yellow { background: #ff0; border-radius: 10px 10px 10px 100%; }
+.simon-btn.purple { background: #d0f; border-radius: 10px 10px 100% 10px; }
+.flash-active { opacity: 1 !important; background: #fff !important; box-shadow: 0 0 20px #fff; }
+.simon-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90px; height: 90px; background: #1a1a1a; border-radius: 50%; border: 4px solid #333; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; }
+#simon-start-btn { background: var(--accent-green); border: none; color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; }
+
+/* 6. RPS */
+.rps-widget { background: #081b31; border: 1px solid #1e3a5f; }
+.rps-scoreboard { display: flex; gap: 30px; }
+.score-box p { font-size: 2.5rem; margin: 0; line-height: 1; }
+.rps-choices { display: flex; gap: 15px; }
+.choice { width: 70px; height: 70px; border-radius: 50%; cursor: pointer; transition: transform 0.2s; }
+.choice:hover { transform: scale(1.1); box-shadow: 0 0 10px #ffde21; }
+.choice img { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; pointer-events: none; }
+#msg { margin-top: auto; background: #1e3a5f; padding: 8px 10px; border-radius: 15px; width: 100%; text-align: center; font-size: 0.8rem; }
+#rps-reset-btn { background: transparent; border: 1px solid var(--accent-red); color: var(--accent-red); padding: 5px 15px; border-radius: 20px; margin-top: 10px; }
+#rps-reset-btn:hover { background: var(--accent-red); color: white; }
+
+/* 7. To-Do List (Fixed Layout) */
+.todo-widget {
+    height: 340px;       /* Fixed height matching 2 stacked cards */
+    min-height: 340px;
+    max-height: 340px;
+    overflow: hidden;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.todo-header { display: flex; justify-content: space-between; width: 100%; flex-shrink: 0; }
+.todo-actions button { background: transparent; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; }
+.todo-actions button:hover { border-color: var(--accent-red); color: var(--accent-red); }
+.todo-input-group { display: flex; gap: 8px; width: 100%; flex-shrink: 0; }
+#todo-input { flex: 1; background: var(--bg-dark); border: 1px solid var(--border); color: white; padding: 8px 12px; border-radius: 6px; }
+#todo-add { background: var(--accent-cyan); width: 35px; border-radius: 6px; color: black; border: none; }
+.todo-scroll-area { flex-grow: 1; overflow-y: auto; padding-right: 5px; min-height: 0; width: 100%; }
+.todo-scroll-area::-webkit-scrollbar { width: 4px; }
+.todo-scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.todo-item { background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border); padding: 10px; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+.todo-item.completed span { text-decoration: line-through; color: var(--text-muted); }
+
+/* ================= STANDARD WIDGETS ================= */
+#colorWidget { border: 2px dashed var(--accent-cyan); text-align: center; }
+.btn-group { margin-top: 15px; display: flex; gap: 10px; }
+#startBtn { background: var(--accent-green); color: white; border: none; padding: 8px 16px; border-radius: 6px; }
+#stopBtn { background: var(--accent-red); color: white; border: none; padding: 8px 16px; border-radius: 6px; }
+
+/* TIMER WIDGET */
+.timer-widget {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Tabs for Pomo/Stopwatch */
+.timer-toggle {
+    display: flex;
+    gap: 5px;
+    background: var(--bg-dark);
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.timer-toggle button {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.timer-toggle button.active {
+    background: var(--accent-cyan);
+    color: #000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Big Digital Display */
+.timer-display-container {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#timer-display {
+    font-family: 'Courier New', monospace;
+    font-size: 4rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+#timer-label {
+    margin-top: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+/* Progress Bar */
+.timer-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-dark);
+    border-radius: 3px;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+#timer-progress {
+    height: 100%;
+    background: var(--accent-cyan);
+    transition: width 1s linear;
+}
+
+/* Controls */
+.timer-controls {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.timer-controls .action-btn { flex: 1; } /* Play button takes mostly space */
+.timer-controls .icon-btn { width: auto; padding: 0 15px; font-size: 1.2rem; }
+
+/* TOAST NOTIFICATIONS */
+.toast {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    font-size: 0.9rem;
+    animation: slideInRight 0.4s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast.success { background: var(--accent-green); color: white; }
+.toast.error { background: var(--accent-red); color: white; }
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* --- TABS NAVIGATION --- */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto 0 auto;
+    padding: 0 20px;
+}
+
+.tab-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text-main);
+}
+
+.tab-btn.active {
+    background: var(--accent-cyan);
+    color: #0f172a; /* Dark text on light button */
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* --- TAB CONTENT LOGIC --- */
+.tab-content {
+    display: none; /* Hidden by default */
+}
+
+.tab-content.active {
+    display: grid; /* Shows ONLY active tab */
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- CALCULATOR WIDGET --- */
+.calc-widget {
+    grid-column: span 1;
+    grid-row: span 2;
+    height: 340px; /* Same height as ToDo */
+}
+
+.calc-display {
+    width: 100%;
+    background: #0f172a;
+    color: #fff;
+    font-family: monospace;
+    font-size: 2rem;
+    padding: 15px;
+    text-align: right;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.calc-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.calc-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.calc-btn:hover { background: rgba(255,255,255,0.1); }
+.calc-btn:active { transform: scale(0.95); }
+
+.calc-btn.op { color: var(--accent-cyan); font-weight: bold; }
+.calc-btn.equals { 
+    grid-column: span 1; 
+    grid-row: span 2; 
+    background: var(--accent-green); 
+    color: white; 
+    border: none;
+}
+.calc-btn.zero { grid-column: span 2; }
+
+/* --- RPS WIDGET RESIZING (Fit Large Box) --- */
+
+/* Force it to span 2 columns like Guess Number */
+.rps-widget.large-widget {
+    grid-column: span 2;
+    grid-row: span 2;
+    gap: 25px; /* More breathing room */
+}
+
+/* Scale up the choices (Hands) */
+.rps-widget.large-widget .rps-choices {
+    gap: 40px; /* Wider gap between rocks/papers */
+}
+
+.rps-widget.large-widget .choice {
+    width: 100px;  /* 70px -> 100px */
+    height: 100px;
+    background: rgba(255,255,255,0.03); /* Subtle backdrop */
+}
+
+.rps-widget.large-widget .choice:hover {
+    transform: scale(1.15); /* Slightly bigger pop */
+}
+
+.rps-widget.large-widget .choice img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Bigger Score Text */
+.rps-widget.large-widget .score-box p {
+    font-size: 3.5rem; /* 2.5rem -> 3.5rem */
+}
+
+/* Bigger Message Box */
+.rps-widget.large-widget #msg {
+    font-size: 1rem;
+    padding: 12px 25px;
+    max-width: 80%; /* Don't stretch too wide */
+}
+
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    background: rgba(15, 23, 42, 0.8);
+    border-top: 1px solid var(--border);
+}
+
+/* TO-DO EMPTY STATE */
+.todo-empty-state {
+    display: none; /* Hidden by default */
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.95rem;
+    opacity: 0.8;
+}

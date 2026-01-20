@@ -1,0 +1,148 @@
+/* RESET & BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f172a; /* Deep Blue-Black */
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* MAIN LAYOUT */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.game-title {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    background: linear-gradient(to right, #22d3ee, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.highlight {
+    color: #fff; /* Fallback */
+}
+
+/* GAME BOARD CONTAINER */
+.game-container {
+    position: relative; /* Needed for the absolute overlay */
+    padding: 20px;
+    background: #1e293b;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #334155;
+}
+
+/* THE GRID */
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.box {
+    height: 100px;
+    width: 100px;
+    background-color: #0f172a;
+    border-radius: 12px;
+    border: 2px solid #334155;
+    font-size: 4rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.box:hover {
+    background-color: #1e293b;
+    border-color: #22d3ee;
+}
+
+/* WINNER OVERLAY POPUP */
+.msg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95); /* Semi-transparent dark bg */
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Hide class for logic */
+.hide {
+    display: none;
+}
+
+#msg {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #22d3ee;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* BUTTONS */
+button {
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+#reset-btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    background-color: #ef4444; /* Red for Reset */
+    color: white;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+#new-btn {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    background-color: #22c55e; /* Green for New Game */
+    color: white;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
