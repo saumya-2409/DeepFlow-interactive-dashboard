@@ -7,4 +7,4 @@ An interactive developer dashboard featuring a Pomodoro timer, utilities, and mi
 - **Glassmorphism UI:** Modern frosted glass design.
 - **Utilities:** Live weather, calculator, and currency converter.
 
-[**🔗 View Live Demo**](PUT_YOUR_GITHUB_PAGES_LINK_HERE)
+[**🔗 View Live Demo**](https://saumya-2409.github.io/DeepFlow-interactive-dashboard/)
